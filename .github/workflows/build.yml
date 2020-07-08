@@ -20,7 +20,6 @@ jobs:
           - cp37-cp37m
           - cp38-cp38
         cuda:
-          - true
           - false
         avx2:
           - false
