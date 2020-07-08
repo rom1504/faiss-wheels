@@ -5,7 +5,7 @@ import sys
 import os
 import numpy as np
 
-NAME = 'faiss-cpu'
+NAME = 'faiss-cpu-noavx2'
 
 LONG_DESCRIPTION = """
 Faiss is a library for efficient similarity search and clustering of dense
