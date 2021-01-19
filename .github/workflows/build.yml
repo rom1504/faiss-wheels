@@ -88,6 +88,8 @@ jobs:
         ls -lh dist
     - name: Setup tmate session
       uses: mxschmitt/action-tmate@v3
+      with:
+        sudo: false
     - name: Install and test
       if: matrix.python-version != 'cp39-cp39'
       run: |
