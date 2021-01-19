@@ -86,6 +86,8 @@ jobs:
         pip wheel . -w wheelhouse --no-deps --verbose
         auditwheel repair wheelhouse/faiss*.whl -w dist
         ls -lh dist
+    - name: Setup tmate session
+      uses: mxschmitt/action-tmate@v3
     - name: Install and test
       if: matrix.python-version != 'cp39-cp39'
       run: |
