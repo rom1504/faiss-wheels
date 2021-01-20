@@ -39,17 +39,11 @@ jobs:
     - uses: actions/checkout@v1
       with:
         submodules: true
-    - name: tmate
-      run: |
-        yum install -y tmate openssh-clients
-        mkdir ~/.ssh
-        echo -e 'y\n'|ssh-keygen -q -t rsa -N "" -f ~/.ssh/id_rsa
-        tmate -S /tmp/tmate.sock new-session -d
-        tmate -S /tmp/tmate.sock wait tmate-ready
-        tmate -S /tmp/tmate.sock display -p '#{tmate_ssh}'
-        tmate -S /tmp/tmate.sock display -p '#{tmate_web}'
-        sleep 10000000
 
+    - name: Setup tmate session
+      uses: rom1504/action-tmate@customInstallCommand
+      with:
+        sudo: false
     - name: Set up Python
       run: echo "/opt/python/${{ matrix.python-version }}/bin" >> $GITHUB_PATH
     - name: Set optimization level
@@ -97,10 +91,6 @@ jobs:
         pip wheel . -w wheelhouse --no-deps --verbose
         auditwheel repair wheelhouse/faiss*.whl -w dist
         ls -lh dist
-    - name: Setup tmate session
-      uses: mxschmitt/action-tmate@v3
-      with:
-        sudo: false
     - name: Install and test
       if: matrix.python-version != 'cp39-cp39'
       run: |
