@@ -43,7 +43,7 @@ jobs:
     - name: Setup tmate session
       uses: rom1504/action-tmate@customInstallCommand
       with:
-        sudo: false
+        installCommand: "yum install -y tmate openssh-clients"
     - name: Set up Python
       run: echo "/opt/python/${{ matrix.python-version }}/bin" >> $GITHUB_PATH
     - name: Set optimization level
